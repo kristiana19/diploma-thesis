@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# clerk configuration (can include secrets)
+/.clerk/
+
+# AI assistant configuration
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+.agents/
+.claude/
