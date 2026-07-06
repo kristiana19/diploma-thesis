@@ -1,36 +1,184 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeInterviewer - INTELIGENTNI SISTEM ZA IZVAJANJE TEHNIČNIH INTERVJUJEV Z AVTOMATIZIRANO ANALIZO KANDIDATOV
 
-## Getting Started
+> **Diplomsko delo** – Višja strokovna šola Academia  
+> **Študijski program:** Računalništvo in informatika
 
-First, run the development server:
+Spletna platforma za izvajanje in avtomatizirano analizo tehničnih intervjujev, ki združuje video komunikacijo, programsko okolje za reševanje nalog ter analizo z velikimi jezikovnimi modeli (LLM).
+
+---
+
+## 📋 O projektu
+
+**Naslov**
+
+Inteligentni sistem za izvajanje tehničnih intervjujev z avtomatizirano analizo kandidatov
+
+**Avtorica**
+
+Kristijana Marušić
+
+**Mentor**
+
+mag. Matjaž Prtenjak
+
+**Leto**
+
+2026
+
+Projekt predstavlja raziskovalni prototip inteligentnega sistema za izvajanje tehničnih intervjujev. Kandidatom omogoča sodelovanje v video intervjuju, reševanje programerskih nalog ter samodejno analizo odgovorov z uporabo velikih jezikovnih modelov (LLM). Cilj sistema je zmanjšati subjektivnost pri ocenjevanju kandidatov ter zagotoviti strukturirano in kakovostno povratno informacijo.
+
+---
+
+## ✨ Funkcionalnosti
+
+- 🔐 Avtentikacija uporabnikov
+- 👥 Video tehnični intervjuji
+- 💻 Monaco Editor za reševanje programerskih nalog
+- ⚡ Izvajanje kode 
+- 🤖 Analiza odgovorov z Google Gemini API
+- 📊 Samodejno AI poročilo
+- 💬 Komentarji in povratne informacije
+- 📅 Upravljanje intervjujev
+
+---
+
+## 🛠️ Tehnološki sklad
+
+| Komponenta | Tehnologija |
+|------------|-------------|
+| Frontend | Next.js, React, TypeScript |
+| Oblikovanje uporabniškega vmesnika | Tailwind CSS 4, shadcn/ui |
+| Avtentikacija | Clerk |
+| Backend | Convex |
+| Video komunikacija | Stream Video SDK |
+| Urejevalnik kode | Monaco Editor |
+| Izvajanje kode | Piston API |
+| AI analiza | Google Gemini API |
+
+---
+
+## 🏗️ Arhitektura sistema
+
+```
+                    +----------------------+
+                    |       Next.js        |
+                    |      Frontend        |
+                    +----------+-----------+
+                               |
+                               |
+                    Clerk Authentication
+                               |
+                               |
+                    +----------v-----------+
+                    |       Convex         |
+                    | Database & Backend   |
+                    +----------+-----------+
+                               |
+       +-----------------------+----------------------+
+       |                       |                      |
+       |                       |                      |
++------v------+       +--------v--------+     +-------v-------+
+| Stream SDK  |       | Gemini API      |     |  Piston API   |
+| Video Calls |       | AI Evaluation   |     | Code Runner   |
++-------------+       +-----------------+     +---------------+
+```
+
+---
+
+## 🚧 Status razvoja
+
+- [x] Avtentikacija uporabnikov
+- [x] Clerk integracija
+- [x] Convex backend
+- [x] Podatkovni model
+- [ ] Video intervjuji
+- [ ] Monaco Editor
+- [ ] Piston API
+- [ ] Gemini analiza
+- [ ] AI poročila
+- [ ] Produkcijska namestitev
+
+---
+
+## 📂 Struktura projekta
+
+```
+diploma-thesis
+│
+├── convex/                # Backend in podatkovni model
+├── public/                # Statične datoteke
+├── src/
+│   ├── app/               # App Router
+│   ├── components/        # React komponente         
+│   └── lib/               # Pomožne funkcije
+│
+├── next.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## 🚀 Zagon projekta
+
+### Kloniranje repozitorija
+
+```bash
+git clone https://github.com/kristiana19/diploma-thesis.git
+cd diploma-thesis
+```
+
+### Namestitev odvisnosti
+
+```bash
+npm install
+```
+
+### Nastavitev okolja
+
+Ustvari datoteko **`.env.local`**:
+
+```env
+NEXT_PUBLIC_CONVEX_URL=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+```
+
+Na platformi Convex nastavi še:
+
+```text
+CLERK_WEBHOOK_SECRET=
+```
+
+### Zagon
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+V drugem terminalu:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx convex dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Aplikacija bo dostopna na:
 
-## Learn More
+```
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 Licenca
 
-## Deploy on Vercel
+Projekt je nastal kot del diplomskega dela na Višji strokovni šoli Academia. Namenjen je izključno za izobraževalne in raziskovalne namene.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center">
+  <sub>
+    © 2026 Kristijana Marušić<br>
+    All rights reserved.
+  </sub>
+</div>
