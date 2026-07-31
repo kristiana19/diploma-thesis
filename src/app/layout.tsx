@@ -1,29 +1,42 @@
-import type { Metadata } from 'next'
-import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
-import { JetBrains_Mono } from 'next/font/google'
-import './globals.css'
-import ConvexClerkProvider from '../components/providers/ConvexClerkProvider'
-import Navbar from '../components/Navbar'
-import { ThemeProvider } from '../components/providers/ThemeProvider'
+import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
+
+import "./globals.css";
+
+import ConvexClerkProvider from "../components/providers/ConvexClerkProvider";
+import Navbar from "../components/Navbar";
+import { ThemeProvider } from "../components/providers/ThemeProvider";
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: 'CodeInterview',
-  description: 'Inteligentni sistem za izvajanje tehničnih intervjujev z avtomatizirano analizo kandidatov',
-}
+  title: "CodeInterview",
+  description:
+    "Inteligentni sistem za izvajanje tehničnih intervjujev z avtomatizirano analizo kandidatov",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${jetbrainsMono.variable} antialiased font-mono`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="min-h-full w-full overflow-x-clip"
+    >
+      <body
+        className={[
+          jetbrainsMono.variable,
+          "min-h-dvh w-full overflow-x-clip",
+          "font-mono antialiased",
+          "bg-background text-foreground",
+        ].join(" ")}
+      >
         <ConvexClerkProvider>
           <ThemeProvider
             attribute="class"
@@ -31,15 +44,16 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="min-h-screen">
+            <div className="flex min-h-dvh w-full min-w-0 flex-col overflow-x-clip">
               <Navbar />
-              <main className='px-4 sm:px-6 lg:px-8'>
+
+              <div className="min-w-0 flex-1">
                 {children}
-              </main>
+              </div>
             </div>
           </ThemeProvider>
         </ConvexClerkProvider>
       </body>
     </html>
-  )
+  );
 }
