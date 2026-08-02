@@ -14,6 +14,7 @@ import {
   DialogTitle,
 } from "./ui/dialog";
 import { Input } from "./ui/input";
+import useMeetingActions from "@/hooks/useMeetingActions";
 
 interface MeetingModalProps {
   isOpen: boolean;
@@ -29,11 +30,10 @@ function MeetingModal({
   onClose,
   title,
   isJoinMeeting,
-  onStartMeeting,
-  onJoinMeeting,
 }: MeetingModalProps) {
   const [meetingUrl, setMeetingUrl] = useState("");
-
+  const { createInstantMeeting, joinMeeting } = useMeetingActions();
+  
   const handleClose = () => {
     setMeetingUrl("");
     onClose();
@@ -41,19 +41,11 @@ function MeetingModal({
 
   const handleStart = () => {
     if (isJoinMeeting) {
-      const meetingId = meetingUrl
-        .trim()
-        .split("/")
-        .filter(Boolean)
-        .pop();
-
-      if (!meetingId) {
-        return;
-      }
-
-      onJoinMeeting?.(meetingId);
+      // if its a full URL extract meeting ID
+      const meetingId = meetingUrl.split("/").pop();
+      if (meetingId) joinMeeting(meetingId);
     } else {
-      onStartMeeting?.();
+      createInstantMeeting();
     }
 
     handleClose();
