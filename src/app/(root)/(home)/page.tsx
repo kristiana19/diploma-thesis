@@ -47,11 +47,11 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <main className="flex min-h-[calc(100dvh-4rem)] w-full items-center justify-center px-4">
-        <div className="glass-panel flex items-center gap-3 rounded-2xl px-5 py-3">
-          <Loader2Icon className="size-5 animate-spin text-primary" />
+      <main className="fixed inset-0 flex items-center justify-center px-4">
+        <div className="glass-panel relative flex min-w-72 items-center justify-center rounded-2xl px-12 py-3">
+          <Loader2Icon className="absolute left-5 size-5 animate-spin text-primary" />
 
-          <span className="text-sm text-muted-foreground">
+          <span className="text-center text-sm text-muted-foreground">
             Loading your workspace...
           </span>
         </div>
