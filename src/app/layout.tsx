@@ -6,6 +6,7 @@ import "./globals.css";
 import ConvexClerkProvider from "../components/providers/ConvexClerkProvider";
 import Navbar from "../components/Navbar";
 import { ThemeProvider } from "../components/providers/ThemeProvider";
+import { Toaster } from "react-hot-toast";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
@@ -52,6 +53,7 @@ export default function RootLayout({
               </div>
             </div>
           </ThemeProvider>
+          <Toaster />
         </ConvexClerkProvider>
       </body>
     </html>
