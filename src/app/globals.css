@@ -1097,3 +1097,329 @@ button[aria-label*="settings"] svg {
   justify-content: space-between !important;
   overflow: visible !important;
 }
+
+/* =========================================================
+   PARTICIPANTS PANEL — FINALNI STIL
+   ========================================================= */
+
+.meeting-participants-panel {
+  padding: 0 !important;
+  color: oklch(0.4 0.08 345) !important;
+  background: oklch(0.98 0.025 345 / 94%) !important;
+  border: 1px solid oklch(0.78 0.14 345 / 55%) !important;
+  overflow: hidden !important;
+}
+
+/* Glavni sadržaj panela */
+.meeting-participants-panel
+  .str-video__participant-list {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+
+  padding: 1rem !important;
+
+  color: oklch(0.4 0.08 345) !important;
+  background: transparent !important;
+
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* =========================================================
+   HEADER: Participants [1] + X
+   ========================================================= */
+
+.meeting-participants-panel
+  .str-video__participant-list-header {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+
+  width: 100% !important;
+  min-height: 2.5rem !important;
+
+  margin: 0 0 1.25rem !important;
+  padding: 0 !important;
+
+  color: oklch(0.42 0.09 345) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Participants i [1] ostaju zajedno */
+.meeting-participants-panel
+  .str-video__participant-list-header__title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.25rem !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: oklch(0.42 0.09 345) !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  opacity: 1 !important;
+}
+
+/* Broj učesnika */
+.meeting-participants-panel
+  .str-video__participant-list-header__title
+  span {
+  display: inline !important;
+  width: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: oklch(0.42 0.09 345) !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+/* X dugme ostaje dio headera */
+.meeting-participants-panel
+  .str-video__participant-list-header__close-button {
+  position: static !important;
+  inset: auto !important;
+  z-index: 1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 2.35rem !important;
+
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+  min-width: 2.35rem !important;
+  min-height: 2.35rem !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: oklch(0.57 0.21 345) !important;
+  background: oklch(0.91 0.075 345 / 78%) !important;
+  border: 1px solid oklch(0.76 0.15 345 / 65%) !important;
+  border-radius: 9999px !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* X ikonica */
+.meeting-participants-panel
+  .str-video__participant-list-header__close-button
+  .str-video__icon--close {
+  display: block !important;
+
+  width: 1rem !important;
+  height: 1rem !important;
+
+  color: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.meeting-participants-panel
+  .str-video__search-input__container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+
+  width: 100% !important;
+
+  margin: 0 0 0.85rem !important;
+  padding: 0.3rem 0.4rem 0.3rem 0.65rem !important;
+
+  background: oklch(0.94 0.05 345 / 82%) !important;
+  border: 1px solid oklch(0.78 0.14 345 / 55%) !important;
+  border-radius: 0.9rem !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.meeting-participants-panel
+  .str-video__search-input__container
+  input {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 2.35rem !important;
+
+  margin: 0 !important;
+  padding: 0.5rem 0.65rem !important;
+
+  color: oklch(0.4 0.09 345) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0.65rem !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.meeting-participants-panel
+  .str-video__search-input__container
+  input::placeholder {
+  color: oklch(0.58 0.08 345) !important;
+  opacity: 0.8 !important;
+}
+
+/* Search ikonica/dugme */
+.meeting-participants-panel
+  .str-video__search-input__container
+  button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 2.25rem !important;
+
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  min-width: 2.25rem !important;
+
+  padding: 0 !important;
+
+  color: oklch(0.57 0.21 345) !important;
+  background: oklch(0.9 0.08 345 / 80%) !important;
+  border: 1px solid oklch(0.76 0.15 345 / 60%) !important;
+  border-radius: 9999px !important;
+}
+
+/* =========================================================
+   MUTE ALL I SADRŽAJ
+   ========================================================= */
+
+.meeting-participants-panel
+  .str-video__participant-list__content-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  width: 100% !important;
+
+  margin: 0 0 0.85rem !important;
+  padding: 0 !important;
+
+  color: oklch(0.5 0.15 345) !important;
+  background: transparent !important;
+}
+
+/* Sva akcijska dugmad */
+.meeting-participants-panel button {
+  color: oklch(0.57 0.21 345) !important;
+  background: oklch(0.91 0.075 345 / 78%) !important;
+  border: 1px solid oklch(0.76 0.15 345 / 65%) !important;
+  border-radius: 9999px !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Participant red */
+.meeting-participants-panel
+  [class*="participant-list-item"],
+.meeting-participants-panel
+  [class*="participant-item"],
+.meeting-participants-panel li {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0.65rem 0.7rem !important;
+
+  color: oklch(0.4 0.09 345) !important;
+  background: oklch(0.94 0.05 345 / 68%) !important;
+  border: 1px solid oklch(0.82 0.11 345 / 48%) !important;
+  border-radius: 0.85rem !important;
+
+  box-shadow: none !important;
+}
+
+/* Ime učesnika */
+.meeting-participants-panel
+  [class*="participant-list-item"]
+  span,
+.meeting-participants-panel
+  [class*="participant-list-item"]
+  p,
+.meeting-participants-panel
+  [class*="participant-item"]
+  span,
+.meeting-participants-panel
+  [class*="participant-item"]
+  p,
+.meeting-participants-panel li span,
+.meeting-participants-panel li p {
+  color: oklch(0.38 0.09 345) !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+/* Avatar */
+.meeting-participants-panel img {
+  width: 2rem !important;
+  height: 2rem !important;
+  flex: 0 0 2rem !important;
+
+  border: 2px solid oklch(1 0 0 / 80%) !important;
+  border-radius: 9999px !important;
+}
+
+/* Ikonice */
+.meeting-participants-panel button svg,
+.meeting-participants-panel button svg *,
+.meeting-participants-panel button span {
+  color: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* Hover */
+.meeting-participants-panel button:hover {
+  color: oklch(0.5 0.23 345) !important;
+  background: oklch(0.84 0.12 345 / 82%) !important;
+  transform: translateY(-1px);
+}
+
+/* Scrollbar */
+.meeting-participants-panel * {
+  scrollbar-width: thin;
+  scrollbar-color:
+    oklch(0.73 0.15 345 / 45%)
+    transparent;
+}
+
+.meeting-participants-panel *::-webkit-scrollbar {
+  width: 5px;
+  height: 0;
+}
+
+.meeting-participants-panel *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.meeting-participants-panel *::-webkit-scrollbar-thumb {
+  background: oklch(0.73 0.15 345 / 45%);
+  border-radius: 9999px;
+}

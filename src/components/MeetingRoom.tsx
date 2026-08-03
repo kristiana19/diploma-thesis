@@ -8,7 +8,11 @@ import {
   SpeakerLayout,
   useCallStateHooks,
 } from "@stream-io/video-react-sdk";
-import { LayoutListIcon, LoaderIcon, UsersIcon } from "lucide-react";
+import {
+  LayoutListIcon,
+  LoaderIcon,
+  UsersIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -35,7 +39,9 @@ function MeetingRoom() {
   const [layout, setLayout] = useState<"grid" | "speaker">(
     "speaker",
   );
-  const [showParticipants, setShowParticipants] = useState(false);
+
+  const [showParticipants, setShowParticipants] =
+    useState(false);
 
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
@@ -71,18 +77,23 @@ function MeetingRoom() {
 
             {/* PARTICIPANTS LIST OVERLAY */}
             {showParticipants && (
-              <div className="absolute right-0 top-0 z-40 h-full w-[85%] max-w-[300px] overflow-y-auto border-l border-pink-200/60 bg-pink-50/90 shadow-xl shadow-pink-500/10 backdrop-blur-2xl dark:border-pink-300/15 dark:bg-pink-950/90">
+              <aside
+                aria-label="Participants"
+                className="meeting-participants-panel absolute bottom-20 right-3 top-3 z-40 w-[calc(100%-1.5rem)] max-w-[320px] overflow-hidden rounded-2xl border border-pink-300/55 bg-pink-50/90 shadow-xl shadow-pink-500/10 backdrop-blur-2xl dark:border-pink-300/20 dark:bg-pink-950/85"
+              >
                 <CallParticipantsList
                   onClose={() => setShowParticipants(false)}
                 />
-              </div>
+              </aside>
             )}
           </div>
 
           {/* VIDEO CONTROLS */}
           <div className="pointer-events-none absolute inset-x-0 bottom-3 z-30 flex justify-center px-2 sm:bottom-4">
             <div className="meeting-room-controls pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-1.5 rounded-full border border-pink-200/60 bg-white/85 p-2 shadow-lg shadow-pink-500/10 backdrop-blur-2xl">
-              <CallControls onLeave={() => router.push("/")} />
+              <CallControls
+                onLeave={() => router.push("/")}
+              />
 
               {/* LAYOUT SELECTOR */}
               <DropdownMenu>
@@ -124,7 +135,9 @@ function MeetingRoom() {
                 }
                 aria-pressed={showParticipants}
                 onClick={() => {
-                  setShowParticipants((current) => !current);
+                  setShowParticipants(
+                    (current) => !current,
+                  );
                 }}
                 className="size-10 shrink-0 rounded-full border border-pink-200/70 bg-white text-pink-500 shadow-none transition-colors hover:bg-pink-50 hover:text-pink-600 aria-pressed:bg-pink-100 aria-pressed:text-pink-600"
               >
@@ -137,7 +150,10 @@ function MeetingRoom() {
         </ResizablePanel>
 
         {/* RESIZE HANDLE */}
-        <ResizableHandle withHandle className="bg-transparent" />
+        <ResizableHandle
+          withHandle
+          className="bg-transparent"
+        />
 
         {/* CODE EDITOR PANEL */}
         <ResizablePanel
