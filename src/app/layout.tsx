@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "./globals.css";
 
 import ConvexClerkProvider from "../components/providers/ConvexClerkProvider";
