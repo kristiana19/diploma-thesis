@@ -18,6 +18,7 @@ const StreamClientProvider = ({
   children: ReactNode;
 }) => {
   const { user, isLoaded } = useUser();
+
   const [videoClient, setVideoClient] =
     useState<StreamVideoClient | null>(null);
 
@@ -27,7 +28,16 @@ const StreamClientProvider = ({
   const imageUrl = user?.imageUrl;
 
   useEffect(() => {
-    if (!isLoaded || !userId) return;
+    if (!isLoaded) return;
+
+    /*
+     * Neprijavljeni korisnik ne treba Stream klijenta.
+     * Javne stranice se normalno prikazuju bez njega.
+     */
+    if (!userId) {
+      setVideoClient(null);
+      return;
+    }
 
     if (!apiKey) {
       throw new Error(
@@ -51,7 +61,26 @@ const StreamClientProvider = ({
     setVideoClient(client);
   }, [isLoaded, userId, firstName, lastName, imageUrl]);
 
-  if (!isLoaded || !userId || !videoClient) {
+  /*
+   * Loader se prikazuje samo dok Clerk još provjerava
+   * da li postoji prijavljeni korisnik.
+   */
+  if (!isLoaded) {
+    return <LoaderUI />;
+  }
+
+  /*
+   * Ako korisnik nije prijavljen, prikaži javnu aplikaciju
+   * bez StreamVideo providera.
+   */
+  if (!userId) {
+    return <>{children}</>;
+  }
+
+  /*
+   * Korisnik je prijavljen, ali se Stream klijent još kreira.
+   */
+  if (!videoClient) {
     return <LoaderUI />;
   }
 
