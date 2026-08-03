@@ -349,3 +349,751 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.str-video,
+.str-video * {
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
+}
+
+/* === CELOTEN PLAVAJOČI MENI === */
+.str-video__menu-container.str-video__menu-container {
+  background: oklch(0.98 0.025 345 / 82%) !important;
+  border: 1px solid oklch(0.9 0.08 345 / 45%) !important;
+  border-radius: 1rem !important;
+
+  backdrop-filter: blur(24px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+
+  box-shadow:
+    0 24px 80px -45px oklch(0.65 0.14 345 / 35%) !important;
+}
+
+/* Dark mode ostane roza in prosojen — brez črne */
+.dark .str-video__menu-container.str-video__menu-container {
+  background: oklch(0.35 0.07 345 / 82%) !important;
+  border-color: oklch(0.85 0.09 345 / 25%) !important;
+}
+
+/* === NASLOVI: Select a Camera, Select a Mic ... === */
+.str-video__device-settings__device-selector-title.str-video__device-settings__device-selector-title {
+  color: oklch(0.67 0.2 345) !important;
+  font-weight: 600 !important;
+}
+
+/* === VSE VRSTICE Z NAPRAVAMI === */
+.str-video__device-settings__option.str-video__device-settings__option {
+  color: oklch(0.38 0.06 345) !important;
+  background: oklch(0.92 0.06 345 / 45%) !important;
+  border-radius: 0.6rem !important;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+.str-video__device-settings__option.str-video__device-settings__option:hover {
+  background: oklch(0.9 0.075 345 / 58%) !important;
+}
+
+/* Izbrana naprava ostane enake barve — brez črne */
+.str-video__device-settings__option.str-video__device-settings__option--selected {
+  color: oklch(0.38 0.06 345) !important;
+  background: oklch(0.92 0.06 345 / 45%) !important;
+}
+
+/* Tudi v dark mode ni črne izbrane vrstice */
+.dark
+  .str-video__device-settings__option.str-video__device-settings__option,
+.dark
+  .str-video__device-settings__option.str-video__device-settings__option--selected {
+  color: oklch(0.94 0.035 345) !important;
+  background: oklch(0.55 0.09 345 / 28%) !important;
+}
+
+/* === RADIO GUMBI — BABY BLUE === */
+.str-video__device-settings__option input[type="radio"] {
+  accent-color: oklch(0.78 0.11 235) !important;
+}
+
+/* === LOČILNE ČRTE === */
+.str-video__device-settings__separator.str-video__device-settings__separator {
+  border-color: oklch(0.78 0.08 345 / 32%) !important;
+  opacity: 0.65 !important;
+}
+
+/* === SETTINGS GUMB — ROZA NAMESTO ČRNE === */
+.str-video__device-settings__button,
+.str-video__device-settings__button--active,
+.str-video__menu-toggle-button,
+button[aria-label*="Settings"],
+button[aria-label*="settings"] {
+  color: oklch(0.66 0.19 345) !important;
+  background: oklch(0.91 0.075 345 / 70%) !important;
+  border-color: oklch(0.82 0.1 345 / 35%) !important;
+  box-shadow: none !important;
+}
+
+.str-video__device-settings__button:hover,
+.str-video__device-settings__button--active:hover,
+.str-video__menu-toggle-button:hover,
+button[aria-label*="Settings"]:hover,
+button[aria-label*="settings"]:hover {
+  color: oklch(0.61 0.21 345) !important;
+  background: oklch(0.87 0.1 345 / 75%) !important;
+}
+
+/* Ikonica znotraj gumba */
+.str-video__device-settings__button svg,
+.str-video__device-settings__button--active svg,
+.str-video__menu-toggle-button svg,
+button[aria-label*="Settings"] svg,
+button[aria-label*="settings"] svg {
+  color: oklch(0.66 0.19 345) !important;
+  fill: none !important;
+}
+
+/* === SETTINGS GUMB — MALO JAČA ROZA === */
+.str-video__device-settings__button,
+.str-video__device-settings__button--active,
+.str-video__menu-toggle-button,
+button[aria-label*="Settings"],
+button[aria-label*="settings"] {
+  color: oklch(0.58 0.22 345) !important;
+  background: oklch(0.84 0.13 345 / 82%) !important;
+  border-color: oklch(0.74 0.17 345 / 45%) !important;
+}
+
+.str-video__device-settings__button svg,
+.str-video__device-settings__button--active svg,
+.str-video__menu-toggle-button svg,
+button[aria-label*="Settings"] svg,
+button[aria-label*="settings"] svg {
+  color: oklch(0.58 0.22 345) !important;
+}
+
+/* === TEST SPEAKER GUMB — PINK === */
+.str-video__speaker-test__button.str-video__composite-button {
+  background: transparent !important;
+}
+
+/* Stvarno unutrašnje dugme */
+.str-video__speaker-test__button
+  .str-video__composite-button__button {
+  color: white !important;
+  background: oklch(0.72 0.18 345 / 88%) !important;
+  border: 1px solid oklch(0.8 0.14 345 / 55%) !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease !important;
+}
+
+/* Hover */
+.str-video__speaker-test__button
+  .str-video__composite-button__button:hover {
+  background: oklch(0.66 0.21 345 / 95%) !important;
+  transform: translateY(-1px);
+}
+
+/* Aktivno/pritisnuto stanje */
+.str-video__speaker-test__button
+  .str-video__composite-button__button:active {
+  background: oklch(0.62 0.22 345 / 100%) !important;
+  transform: translateY(0);
+}
+
+/* Tekst in ikonica zvočnika */
+.str-video__speaker-test__button-content,
+.str-video__speaker-test__button-content svg {
+  color: white !important;
+}
+
+/* Ako Stream postavlja fill na SVG */
+.str-video__speaker-test__button-content svg {
+  fill: currentColor !important;
+}
+
+/* =========================================================
+   MEETING ROOM — STREAM VIDEO
+   ========================================================= */
+
+/* Glavna video površina */
+.meeting-room .str-video__speaker-layout,
+.meeting-room .str-video__paginated-grid-layout {
+  background: transparent !important;
+  padding: 0.75rem !important;
+}
+
+/* Kartica svakog učesnika */
+.meeting-room .str-video__participant-view {
+  overflow: hidden !important;
+  background: oklch(0.96 0.035 345 / 70%) !important;
+  border: 1px solid oklch(0.88 0.08 345 / 40%) !important;
+  border-radius: 1rem !important;
+  box-shadow: none !important;
+}
+
+/* Kada kamera nije uključena */
+.meeting-room .str-video__participant-view__video-placeholder {
+  background:
+    radial-gradient(
+      circle at center,
+      oklch(0.97 0.045 345 / 95%),
+      oklch(0.93 0.055 345 / 75%)
+    ) !important;
+}
+
+/* Avatar */
+.meeting-room .str-video__participant-view__video-placeholder img {
+  width: 6rem !important;
+  height: 6rem !important;
+  border: 3px solid oklch(1 0 0 / 75%) !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 12px 35px oklch(0.67 0.16 345 / 20%) !important;
+}
+
+/* Ime učesnika */
+.meeting-room .str-video__participant-view__participant-details {
+  color: oklch(0.42 0.07 345) !important;
+  background: oklch(0.98 0.025 345 / 75%) !important;
+  border: 1px solid oklch(0.87 0.08 345 / 35%) !important;
+  border-radius: 9999px !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+/* Indikator zvuka */
+.meeting-room .str-video__participant-view__audio-volume-indicator {
+  color: oklch(0.67 0.2 345) !important;
+  background: oklch(0.96 0.05 345 / 80%) !important;
+  border-radius: 9999px !important;
+}
+
+/* Dugme sa tri tačke */
+.meeting-room .str-video__participant-view__menu-button,
+.meeting-room button[aria-label*="participant"],
+.meeting-room button[aria-label*="Participant"] {
+  color: oklch(0.59 0.19 345) !important;
+  background: oklch(0.91 0.08 345 / 85%) !important;
+  border: 1px solid oklch(0.81 0.12 345 / 40%) !important;
+  box-shadow: none !important;
+}
+
+.meeting-room .str-video__participant-view__menu-button:hover,
+.meeting-room button[aria-label*="participant"]:hover,
+.meeting-room button[aria-label*="Participant"]:hover {
+  background: oklch(0.86 0.12 345 / 90%) !important;
+}
+
+/* =========================================================
+   MENI: PIN, BLOCK, KICK...
+   ========================================================= */
+
+/* Spoljašnja kartica menija */
+.meeting-room .str-video__menu-container {
+  width: min(16rem, calc(100vw - 2rem)) !important;
+  max-height: min(31rem, calc(100vh - 8rem)) !important;
+  overflow-y: auto !important;
+
+  padding: 0.55rem !important;
+  background: oklch(0.98 0.03 345 / 88%) !important;
+  border: 1px solid oklch(0.85 0.09 345 / 42%) !important;
+  border-radius: 1rem !important;
+
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+
+  box-shadow:
+    0 20px 55px -30px oklch(0.58 0.17 345 / 38%) !important;
+}
+
+/* Svaka opcija u meniju */
+.meeting-room .str-video__menu-container button,
+.meeting-room .str-video__menu-container [role="menuitem"] {
+  min-height: 2.25rem !important;
+  width: 100% !important;
+
+  color: oklch(0.43 0.08 345) !important;
+  background: oklch(0.91 0.065 345 / 55%) !important;
+  border: 1px solid transparent !important;
+  border-radius: 0.7rem !important;
+
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    transform 150ms ease !important;
+}
+
+/* Razmak između opcija */
+.meeting-room .str-video__menu-container button + button,
+.meeting-room
+  .str-video__menu-container
+  [role="menuitem"] + [role="menuitem"] {
+  margin-top: 0.3rem !important;
+}
+
+/* Hover opcije */
+.meeting-room .str-video__menu-container button:hover,
+.meeting-room .str-video__menu-container [role="menuitem"]:hover {
+  color: oklch(0.55 0.2 345) !important;
+  background: oklch(0.86 0.11 345 / 70%) !important;
+  transform: translateX(2px);
+}
+
+/* Ikonice u meniju */
+.meeting-room .str-video__menu-container button svg,
+.meeting-room .str-video__menu-container [role="menuitem"] svg {
+  color: oklch(0.62 0.18 345) !important;
+}
+
+/* =========================================================
+   DONJI PANEL SA KONTROLAMA
+   ========================================================= */
+
+.meeting-room-controls {
+  background: oklch(0.98 0.025 345 / 88%) !important;
+  border: 1px solid oklch(0.82 0.12 345 / 55%) !important;
+  border-radius: 9999px !important;
+
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+
+  box-shadow:
+    0 16px 40px -25px oklch(0.62 0.18 345 / 38%) !important;
+}
+
+/* Streamov prostor oko kontrola */
+.meeting-room-controls .str-video__call-controls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Ukloni Streamovo blijeđenje */
+.meeting-room-controls button,
+.meeting-room-controls button:disabled,
+.meeting-room-controls button *,
+.meeting-room-controls .str-video__composite-button,
+.meeting-room-controls .str-video__composite-button *,
+.meeting-room-controls .str-video__call-controls * {
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   OBIČNA OKRUGLA DUGMAD
+   ========================================================= */
+
+.meeting-room-controls button {
+  color: oklch(0.56 0.21 345) !important;
+  background: oklch(0.9 0.075 345 / 76%) !important;
+  border: 1px solid oklch(0.76 0.15 345 / 68%) !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   SLOŽENA DUGMAD — MIKROFON I KAMERA
+   ========================================================= */
+
+.meeting-room-controls .str-video__composite-button {
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+}
+
+/* Zajednički rozi okvir */
+.meeting-room-controls
+  .str-video__composite-button__button-group {
+  overflow: hidden !important;
+  color: oklch(0.56 0.21 345) !important;
+  background: oklch(0.9 0.075 345 / 76%) !important;
+  border: 1px solid oklch(0.76 0.15 345 / 68%) !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+}
+
+/* Glavni dio složenog dugmeta */
+.meeting-room-controls
+  .str-video__composite-button__button {
+  color: oklch(0.56 0.21 345) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Mala strelica uz mikrofon ili kameru */
+.meeting-room-controls
+  .str-video__composite-button__menu-button {
+  color: oklch(0.56 0.21 345) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 1px solid oklch(0.73 0.16 345 / 48%) !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   ROZE IKONICE
+   ========================================================= */
+
+/* SVG ikonice */
+.meeting-room-controls svg,
+.meeting-room-controls svg *,
+.meeting-room-controls svg path,
+.meeting-room-controls svg line,
+.meeting-room-controls svg circle,
+.meeting-room-controls svg polyline,
+.meeting-room-controls svg polygon {
+  color: oklch(0.56 0.21 345) !important;
+  stroke: oklch(0.56 0.21 345) !important;
+  opacity: 1 !important;
+}
+
+/* Ikonice koje koriste fill */
+.meeting-room-controls svg path[fill]:not([fill="none"]),
+.meeting-room-controls svg circle[fill]:not([fill="none"]),
+.meeting-room-controls svg polygon[fill]:not([fill="none"]) {
+  fill: oklch(0.56 0.21 345) !important;
+}
+
+/* Stream ikonice koje koriste CSS masku */
+.meeting-room-controls .str-video__icon,
+.meeting-room-controls [class*="str-video__icon"] {
+  color: oklch(0.56 0.21 345) !important;
+  background-color: oklch(0.56 0.21 345) !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.meeting-room-controls button:hover,
+.meeting-room-controls
+  .str-video__composite-button__button-group:hover {
+  color: oklch(0.5 0.23 345) !important;
+  background: oklch(0.84 0.12 345 / 82%) !important;
+  border-color: oklch(0.69 0.19 345 / 78%) !important;
+}
+
+/* Ikonice na hover */
+.meeting-room-controls button:hover svg,
+.meeting-room-controls button:hover svg *,
+.meeting-room-controls
+  .str-video__composite-button__button-group:hover
+  svg,
+.meeting-room-controls
+  .str-video__composite-button__button-group:hover
+  svg * {
+  color: oklch(0.5 0.23 345) !important;
+  stroke: oklch(0.5 0.23 345) !important;
+}
+
+/* =========================================================
+   AKTIVNO I DISABLED STANJE
+   ========================================================= */
+
+.meeting-room-controls button:disabled,
+.meeting-room-controls button[aria-disabled="true"],
+.meeting-room-controls button[aria-pressed="true"],
+.meeting-room-controls
+  .str-video__composite-button--disabled
+  .str-video__composite-button__button-group,
+.meeting-room-controls
+  .str-video__composite-button--active
+  .str-video__composite-button__button-group {
+  color: oklch(0.53 0.22 345) !important;
+  background: oklch(0.87 0.1 345 / 82%) !important;
+  border-color: oklch(0.7 0.18 345 / 75%) !important;
+  opacity: 1 !important;
+}
+
+/* Ikonice disabled dugmadi */
+.meeting-room-controls button:disabled svg,
+.meeting-room-controls button:disabled svg *,
+.meeting-room-controls button[aria-disabled="true"] svg,
+.meeting-room-controls button[aria-disabled="true"] svg * {
+  color: oklch(0.53 0.22 345) !important;
+  stroke: oklch(0.53 0.22 345) !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   LEAVE CALL DUGME
+   ========================================================= */
+
+.meeting-room-controls
+  .str-video__call-controls__button--leave,
+.meeting-room-controls
+  button[aria-label*="leave"],
+.meeting-room-controls
+  button[aria-label*="Leave"] {
+  color: oklch(0.56 0.21 345) !important;
+  background: oklch(0.9 0.075 345 / 76%) !important;
+  border-color: oklch(0.76 0.15 345 / 68%) !important;
+}
+
+/* =========================================================
+   DIREKTNA DUGMAD — LAYOUT, PARTICIPANTS, END CALL
+   ========================================================= */
+
+.meeting-room-controls > button {
+  color: oklch(0.56 0.21 345) !important;
+  background: oklch(0.9 0.075 345 / 76%) !important;
+  border-color: oklch(0.76 0.15 345 / 68%) !important;
+}
+
+/* =========================================================
+   VIDEO / AVATAR KARTICA — TRANSPARENTNA BABY PINK
+   ========================================================= */
+
+.meeting-room .str-video__participant-view {
+  overflow: hidden !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      oklch(0.97 0.04 345 / 82%),
+      oklch(0.9 0.085 345 / 62%)
+    ) !important;
+
+  border: 1px solid oklch(0.76 0.15 345 / 52%) !important;
+  border-radius: 1rem !important;
+
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 65%),
+    0 24px 60px -42px oklch(0.6 0.18 345 / 45%) !important;
+}
+
+/* Površina kada je kamera ugašena */
+.meeting-room .str-video__participant-view__video-placeholder,
+.meeting-room .str-video__video-placeholder,
+.meeting-room [class*="video-placeholder"] {
+  background:
+    radial-gradient(
+      circle at center,
+      oklch(0.97 0.04 345 / 88%) 0%,
+      oklch(0.89 0.09 345 / 68%) 100%
+    ) !important;
+
+  border-radius: inherit !important;
+}
+
+/* Streamovi unutrašnji video wrapperi */
+.meeting-room .str-video__participant-view__video-container,
+.meeting-room .str-video__participant-view__video-wrapper {
+  background: transparent !important;
+  border-radius: inherit !important;
+}
+
+/* Pravi video */
+.meeting-room .str-video__participant-view video {
+  background: transparent !important;
+  border-radius: inherit !important;
+}
+
+/* Avatar */
+.meeting-room .str-video__participant-view img {
+  border: 3px solid oklch(1 0 0 / 78%) !important;
+  border-radius: 9999px !important;
+
+  box-shadow:
+    0 14px 38px -18px oklch(0.58 0.19 345 / 48%) !important;
+}
+
+/* =========================================================
+   REACTIONS / EMOJI MENI
+   ========================================================= */
+
+/*
+ * Spoljašnji Stream menu-container je jedina kartica koja
+ * dobija pozadinu, zaobljenje i rub.
+ */
+.meeting-room
+  .str-video__menu-container:has(> .str-video__reactions-menu) {
+  padding: 0.65rem 0.75rem !important;
+
+  background: oklch(0.98 0.025 345 / 92%) !important;
+  border: 1px solid oklch(0.8 0.13 345 / 55%) !important;
+  border-radius: 1rem !important;
+
+  outline: 0 !important;
+
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+
+  box-shadow:
+    0 16px 40px -25px oklch(0.62 0.18 345 / 38%) !important;
+}
+
+/*
+ * Unutrašnji reactions-menu nema svoj rub, pozadinu,
+ * padding ni shadow. Time nestaje dvostruki okvir.
+ */
+.meeting-room .str-video__reactions-menu,
+.meeting-room .str-video__reactions-menu--horizontal {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Ukloni stilove sa dodatnih unutrašnjih wrappera */
+.meeting-room .str-video__reactions-menu > div,
+.meeting-room .str-video__reactions-menu--horizontal > div {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Veće područje za svaku reakciju */
+.meeting-room .str-video__reactions-menu button,
+.meeting-room .str-video__reactions-menu--horizontal button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  min-width: 2.8rem !important;
+  min-height: 2.8rem !important;
+
+  padding: 0.3rem !important;
+
+  color: initial !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0.75rem !important;
+
+  outline: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease !important;
+}
+
+/* Povećaj stvarni emoji/sticker */
+.meeting-room .str-video__reactions-menu button span,
+.meeting-room .str-video__reactions-menu--horizontal button span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: initial !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+}
+
+/* Ako je reakcija prikazana direktno u buttonu */
+.meeting-room .str-video__reactions-menu button *,
+.meeting-room .str-video__reactions-menu--horizontal button * {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Nježan rozi hover */
+.meeting-room .str-video__reactions-menu button:hover,
+.meeting-room .str-video__reactions-menu--horizontal button:hover {
+  background: oklch(0.9 0.075 345 / 72%) !important;
+  transform: translateY(-1px) scale(1.06);
+}
+
+/* Klik na reakciju */
+.meeting-room .str-video__reactions-menu button:active,
+.meeting-room .str-video__reactions-menu--horizontal button:active {
+  background: oklch(0.85 0.115 345 / 78%) !important;
+  transform: scale(0.96);
+}
+
+/* Bez focus kvadrata */
+.meeting-room .str-video__reactions-menu button:focus,
+.meeting-room .str-video__reactions-menu button:focus-visible,
+.meeting-room
+  .str-video__reactions-menu--horizontal
+  button:focus,
+.meeting-room
+  .str-video__reactions-menu--horizontal
+  button:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   IME UČESNIKA — SVJETLIJE
+   ========================================================= */
+
+.meeting-room
+  .str-video__participant-view__participant-details {
+  color: oklch(0.97 0.025 345) !important;
+  background: oklch(0.42 0.08 345 / 55%) !important;
+  border: 1px solid oklch(1 0 0 / 12%) !important;
+  border-radius: 0 0.65rem 0 0 !important;
+
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+/* Ime i sve unutar tog dijela */
+.meeting-room
+  .str-video__participant-view__participant-details,
+.meeting-room
+  .str-video__participant-view__participant-details * {
+  color: oklch(0.97 0.025 345) !important;
+  opacity: 1 !important;
+}
+
+/* Rezervni selektori ako Stream koristi drugu verziju naziva */
+.meeting-room [class*="participant-details"],
+.meeting-room [class*="participant-details"] * {
+  color: oklch(0.97 0.025 345) !important;
+}
+
+/* Emoji panel mora biti dovoljno širok za sve reakcije */
+.meeting-room
+  .str-video__menu-container:has(> .str-video__reactions-menu) {
+  width: 22rem !important;
+  min-width: 22rem !important;
+  max-width: calc(100vw - 2rem) !important;
+
+  padding: 0.7rem 0.9rem !important;
+  overflow: visible !important;
+}
+
+/* Reakcije ravnomjerno rasporedi unutar većeg okvira */
+.meeting-room .str-video__reactions-menu,
+.meeting-room .str-video__reactions-menu--horizontal {
+  width: 100% !important;
+  justify-content: space-between !important;
+  overflow: visible !important;
+}
