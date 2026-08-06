@@ -31,6 +31,7 @@ import {
 
 import { Button } from "./ui/button";
 import EndCallButton from "./EndCallButton";
+import CodeEditor from "./CodeEditor";
 // import CodeEditor from "./CodeEditor";
 
 function MeetingRoom() {
@@ -157,21 +158,11 @@ function MeetingRoom() {
 
         {/* CODE EDITOR PANEL */}
         <ResizablePanel
-          defaultSize="55"
-          minSize="30"
-          className="min-h-[280px] overflow-hidden rounded-2xl border border-pink-200/50 bg-pink-50/35 shadow-sm shadow-pink-500/5 backdrop-blur-xl dark:border-pink-300/15 dark:bg-pink-950/20"
-        >
-          {/* <CodeEditor /> */}
-
-          <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
-              Code editor
-            </span>
-
-            <p className="text-sm text-muted-foreground">
-              Coming soon
-            </p>
-          </div>
+          defaultSize={55}
+          minSize={35}
+          className="min-h-0 overflow-hidden rounded-2xl border border-pink-200/50 bg-pink-50/35 shadow-sm shadow-pink-500/5 backdrop-blur-xl dark:border-pink-300/15 dark:bg-pink-950/20"
+          >
+          <CodeEditor />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
