@@ -17,7 +17,9 @@ function RecordingsPage() {
 
       try {
         // Get recordings for each call
-        const callData = await Promise.all(calls.map((call) => call.queryRecordings()));
+        const callData = await Promise.all(
+          calls.map((call) => call.queryRecordings()),
+        );
         const allRecordings = callData.flatMap((call) => call.recordings);
 
         setRecordings(allRecordings);
@@ -32,29 +34,39 @@ function RecordingsPage() {
   if (isLoading) return <LoaderUI />;
 
   return (
-    <div className="container max-w-7xl mx-auto p-6">
+    <main className="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-7xl min-w-0 flex-col px-3 py-4 min-[380px]:px-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       {/* HEADER SECTION */}
-      <h1 className="text-3xl font-bold">Recordings</h1>
-      <p className="text-muted-foreground my-1">
-        {recordings.length} {recordings.length === 1 ? "recording" : "recordings"} available
-      </p>
+      <header className="min-w-0 shrink-0">
+        <h1 className="break-words text-2xl font-bold tracking-tight sm:text-3xl">
+          Recordings
+        </h1>
+
+        <p className="mt-1 break-words text-sm text-muted-foreground sm:text-base">
+          {recordings.length}{" "}
+          {recordings.length === 1 ? "recording" : "recordings"} available
+        </p>
+      </header>
 
       {/* RECORDINGS GRID */}
-
-      <ScrollArea className="h-[calc(100vh-12rem)] mt-3">
+      <ScrollArea className="mt-4 min-h-0 w-full min-w-0 flex-1 sm:mt-5">
         {recordings.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-6">
-            {recordings.map((r) => (
-              <RecordingCard key={r.end_time} recording={r} />
+          <div className="grid w-full min-w-0 grid-cols-1 gap-4 pb-5 sm:grid-cols-2 sm:gap-5 sm:pb-6 xl:grid-cols-3 xl:gap-6">
+            {recordings.map((recording) => (
+              <div key={recording.end_time} className="min-w-0">
+                <RecordingCard recording={recording} />
+              </div>
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-            <p className="text-xl font-medium text-muted-foreground">No recordings available</p>
+          <div className="flex min-h-[min(24rem,55dvh)] w-full items-center justify-center rounded-2xl border border-border/60 px-4 py-12 text-center">
+            <p className="break-words text-base font-medium text-muted-foreground sm:text-lg">
+              No recordings available
+            </p>
           </div>
         )}
       </ScrollArea>
-    </div>
+    </main>
   );
 }
+
 export default RecordingsPage;

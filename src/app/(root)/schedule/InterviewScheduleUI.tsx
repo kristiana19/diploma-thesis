@@ -132,12 +132,16 @@ function InterviewScheduleUI() {
   );
 
   return (
-    <div className="container max-w-7xl mx-auto p-6 space-y-8">
-      <div className="flex items-center justify-between">
+    <main className="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-7xl min-w-0 flex-col gap-6 px-3 py-4 min-[380px]:px-4 sm:gap-8 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+      <div className="flex w-full min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         {/* HEADER INFO */}
-        <div>
-          <h1 className="text-3xl font-bold">Interviews</h1>
-          <p className="text-muted-foreground mt-1">Schedule and manage interviews</p>
+        <div className="min-w-0">
+          <h1 className="break-words text-2xl font-bold tracking-tight sm:text-3xl">
+            Interviews
+          </h1>
+          <p className="mt-1 break-words text-sm text-muted-foreground sm:text-base">
+            Schedule and manage interviews
+          </p>
         </div>
 
         {/* DIALOG */}
@@ -145,17 +149,17 @@ function InterviewScheduleUI() {
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger
             render={
-              <Button size="lg">
+              <Button size="lg" className="w-full sm:w-auto">
                 Schedule Interview
               </Button>
             }
           />
 
-          <DialogContent className="sm:max-w-[500px] h-[calc(100vh-200px)] overflow-auto">
+          <DialogContent className="max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] overflow-y-auto rounded-2xl p-4 sm:max-h-[calc(100dvh-3rem)] sm:max-w-[540px] sm:p-6">
             <DialogHeader>
               <DialogTitle>Schedule Interview</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4 py-4">
+            <div className="min-w-0 space-y-4 py-2 sm:py-4">
               {/* INTERVIEW TITLE */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Title</label>
@@ -189,7 +193,7 @@ function InterviewScheduleUI() {
                   })
                 }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full min-w-0">
                     <SelectValue placeholder="Select candidate" />
                   </SelectTrigger>
                   <SelectContent>
@@ -205,17 +209,18 @@ function InterviewScheduleUI() {
               {/* INTERVIEWERS */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Interviewers</label>
-                <div className="flex flex-wrap gap-2 mb-2">
+                <div className="mb-2 flex min-w-0 flex-wrap gap-2">
                   {selectedInterviewers.map((interviewer) => (
                     <div
                       key={interviewer.clerkId}
-                      className="inline-flex items-center gap-2 bg-secondary px-2 py-1 rounded-md text-sm"
+                      className="inline-flex max-w-full min-w-0 items-center gap-2 rounded-md bg-secondary px-2 py-1 text-sm"
                     >
                       <UserInfo user={interviewer} />
                       {interviewer.clerkId !== user?.id && (
                         <button
                           onClick={() => removeInterviewer(interviewer.clerkId)}
-                          className="hover:text-destructive transition-colors"
+                          type="button"
+                          className="shrink-0 transition-colors hover:text-destructive"
                         >
                           <XIcon className="h-4 w-4" />
                         </button>
@@ -231,7 +236,7 @@ function InterviewScheduleUI() {
                       }
                     }}
                   >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full min-w-0">
                   <SelectValue placeholder="Add interviewer" />
                   </SelectTrigger>
 
@@ -250,22 +255,22 @@ function InterviewScheduleUI() {
               </div>
 
               {/* DATE & TIME */}
-              <div className="flex gap-4">
+              <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
                 {/* CALENDAR */}
-                <div className="space-y-2">
+                <div className="min-w-0 flex-1 space-y-2">
                   <label className="text-sm font-medium">Date</label>
                   <Calendar
                     mode="single"
                     selected={formData.date}
                     onSelect={(date) => date && setFormData({ ...formData, date })}
                     disabled={(date) => date < new Date()}
-                    className="rounded-md border"
+                    className="mx-auto w-full max-w-full rounded-md border sm:mx-0"
                   />
                 </div>
 
                 {/* TIME */}
 
-                <div className="space-y-2">
+                <div className="w-full min-w-0 space-y-2 sm:w-36 sm:shrink-0">
                   <label className="text-sm font-medium">Time</label>
                   <Select
                     value={formData.time}
@@ -276,7 +281,7 @@ function InterviewScheduleUI() {
                   })
                 }
                 >
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select time" />
                     </SelectTrigger>
                     <SelectContent>
@@ -291,11 +296,19 @@ function InterviewScheduleUI() {
               </div>
 
               {/* ACTION BUTTONS */}
-              <div className="flex justify-end gap-3 pt-4">
-                <Button variant="outline" onClick={() => setOpen(false)}>
+              <div className="flex flex-col-reverse gap-3 pt-3 min-[420px]:flex-row min-[420px]:justify-end sm:pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setOpen(false)}
+                  className="w-full min-[420px]:w-auto"
+                >
                   Cancel
                 </Button>
-                <Button onClick={scheduleMeeting} disabled={isCreating}>
+                <Button
+                  onClick={scheduleMeeting}
+                  disabled={isCreating}
+                  className="w-full min-[420px]:w-auto"
+                >
                   {isCreating ? (
                     <>
                       <Loader2Icon className="mr-2 size-4 animate-spin" />
@@ -317,17 +330,21 @@ function InterviewScheduleUI() {
           <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
         </div>
       ) : interviews.length > 0 ? (
-        <div className="spacey-4">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="w-full min-w-0">
+          <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 xl:gap-6">
             {interviews.map((interview) => (
-              <MeetingCard key={interview._id} interview={interview} />
+              <div key={interview._id} className="min-w-0">
+                <MeetingCard interview={interview} />
+              </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="text-center py-12 text-muted-foreground">No interviews scheduled</div>
+        <div className="flex min-h-48 w-full items-center justify-center rounded-2xl border border-border/60 px-4 py-12 text-center text-sm text-muted-foreground sm:text-base">
+          No interviews scheduled
+        </div>
       )}
-    </div>
+    </main>
   );
 }
 export default InterviewScheduleUI;

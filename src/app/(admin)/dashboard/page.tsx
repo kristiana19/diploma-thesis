@@ -12,10 +12,7 @@ import {
 } from "lucide-react";
 
 import { api } from "../../../../convex/_generated/api";
-import {
-  Doc,
-  Id,
-} from "../../../../convex/_generated/dataModel";
+import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
 import CommentDialog from "@/components/CommentDialog";
 import LoaderUI from "@/components/LoaderUI";
@@ -38,13 +35,11 @@ function DashboardPage() {
   const users = useQuery(api.users.getUsers);
   const interviews = useQuery(api.interviews.getAllInterviews);
 
-  const updateStatus = useMutation(
-    api.interviews.updateInterviewStatus
-  );
+  const updateStatus = useMutation(api.interviews.updateInterviewStatus);
 
   const handleStatusUpdate = async (
     interviewId: Id<"interviews">,
-    status: string
+    status: string,
   ) => {
     try {
       await updateStatus({
@@ -65,147 +60,133 @@ function DashboardPage() {
   const groupedInterviews = groupInterviews(interviews);
 
   return (
-    <div className="container mx-auto py-10">
-      <div className="mb-8 flex items-center">
+    <main className="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-7xl min-w-0 flex-col px-3 py-4 min-[380px]:px-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+      <div className="mb-6 flex w-full min-w-0 flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-end">
         <Button
           nativeButton={false}
           render={<Link href="/schedule" />}
+          className="w-full sm:w-auto"
         >
           Schedule New Interview
         </Button>
       </div>
 
-      <div className="space-y-8">
+      <div className="flex w-full min-w-0 flex-col gap-8 sm:gap-10">
         {INTERVIEW_CATEGORY.map((category) => {
-          const categoryInterviews =
-            groupedInterviews[category.id];
+          const categoryInterviews = groupedInterviews[category.id];
 
           if (!categoryInterviews?.length) {
             return null;
           }
 
           return (
-            <section key={category.id}>
+            <section key={category.id} className="w-full min-w-0">
               {/* CATEGORY TITLE */}
-              <div className="mb-4 flex items-center gap-2">
-                <h2 className="text-xl font-semibold">
+              <div className="mb-4 flex min-w-0 items-center gap-2 px-1">
+                <h2 className="min-w-0 break-words text-lg font-semibold sm:text-xl">
                   {category.title}
                 </h2>
 
-                <Badge variant={category.variant}>
+                <Badge variant={category.variant} className="shrink-0">
                   {categoryInterviews.length}
                 </Badge>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {categoryInterviews.map(
-                  (interview: Interview) => {
-                    const candidateInfo = getCandidateInfo(
-                      users,
-                      interview.candidateId
-                    );
+              <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 xl:gap-6">
+                {categoryInterviews.map((interview: Interview) => {
+                  const candidateInfo = getCandidateInfo(
+                    users,
+                    interview.candidateId,
+                  );
 
-                    const startTime = new Date(
-                      interview.startTime
-                    );
+                  const startTime = new Date(interview.startTime);
 
-                    return (
-                      <Card
-                        key={interview._id}
-                        className="transition-all hover:shadow-md"
-                      >
-                        {/* CANDIDATE INFO */}
-                        <CardHeader className="p-4">
-                          <div className="flex items-center gap-3">
-                            <Avatar className="h-10 w-10">
-                              <AvatarImage
-                                src={candidateInfo.image}
-                                alt={candidateInfo.name}
-                              />
+                  return (
+                    <Card
+                      key={interview._id}
+                      className="flex h-full min-w-0 flex-col overflow-hidden transition-all hover:shadow-md"
+                    >
+                      {/* CANDIDATE INFO */}
+                      <CardHeader className="min-w-0 p-4 sm:p-5">
+                        <div className="flex min-w-0 items-center gap-3">
+                          <Avatar className="size-10 shrink-0 sm:size-11">
+                            <AvatarImage
+                              src={candidateInfo.image}
+                              alt={candidateInfo.name}
+                            />
 
-                              <AvatarFallback>
-                                {candidateInfo.initials}
-                              </AvatarFallback>
-                            </Avatar>
+                            <AvatarFallback>
+                              {candidateInfo.initials}
+                            </AvatarFallback>
+                          </Avatar>
 
-                            <div className="min-w-0">
-                              <CardTitle className="truncate text-base">
-                                {candidateInfo.name}
-                              </CardTitle>
+                          <div className="min-w-0 flex-1">
+                            <CardTitle className="truncate text-sm sm:text-base">
+                              {candidateInfo.name}
+                            </CardTitle>
 
-                              <p className="truncate text-sm text-muted-foreground">
-                                {interview.title}
-                              </p>
-                            </div>
+                            <p className="mt-0.5 truncate text-xs text-muted-foreground sm:text-sm">
+                              {interview.title}
+                            </p>
                           </div>
-                        </CardHeader>
+                        </div>
+                      </CardHeader>
 
-                        {/* DATE AND TIME */}
-                        <CardContent className="p-4">
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <CalendarIcon className="h-4 w-4" />
-                              <span>
-                                {format(startTime, "MMM dd")}
-                              </span>
-                            </div>
-
-                            <div className="flex items-center gap-1">
-                              <ClockIcon className="h-4 w-4" />
-                              <span>
-                                {format(startTime, "hh:mm a")}
-                              </span>
-                            </div>
+                      {/* DATE AND TIME */}
+                      <CardContent className="min-w-0 flex-1 px-4 pb-4 pt-0 sm:px-5 sm:pb-5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground sm:text-sm">
+                          <div className="flex shrink-0 items-center gap-1.5">
+                            <CalendarIcon className="size-4 shrink-0" />
+                            <span>{format(startTime, "MMM dd")}</span>
                           </div>
-                        </CardContent>
 
-                        {/* PASS AND FAIL BUTTONS */}
-                        <CardFooter className="flex flex-col gap-3 p-4 pt-0">
-                          {interview.status === "completed" && (
-                            <div className="flex w-full gap-2">
-                              <Button
-                                className="flex-1"
-                                onClick={() =>
-                                  handleStatusUpdate(
-                                    interview._id,
-                                    "succeeded"
-                                  )
-                                }
-                              >
-                                <CheckCircle2Icon className="mr-2 h-4 w-4" />
-                                Pass
-                              </Button>
+                          <div className="flex shrink-0 items-center gap-1.5">
+                            <ClockIcon className="size-4 shrink-0" />
+                            <span>{format(startTime, "hh:mm a")}</span>
+                          </div>
+                        </div>
+                      </CardContent>
 
-                              <Button
-                                variant="destructive"
-                                className="flex-1"
-                                onClick={() =>
-                                  handleStatusUpdate(
-                                    interview._id,
-                                    "failed"
-                                  )
-                                }
-                              >
-                                <XCircleIcon className="mr-2 h-4 w-4" />
-                                Fail
-                              </Button>
-                            </div>
-                          )}
+                      {/* PASS AND FAIL BUTTONS */}
+                      <CardFooter className="mt-auto flex min-w-0 flex-col gap-3 px-4 pb-4 pt-0 sm:px-5 sm:pb-5">
+                        {interview.status === "completed" && (
+                          <div className="flex w-full min-w-0 flex-col gap-2 min-[360px]:flex-row">
+                            <Button
+                              className="w-full min-w-0 flex-1"
+                              onClick={() =>
+                                handleStatusUpdate(interview._id, "succeeded")
+                              }
+                            >
+                              <CheckCircle2Icon className="mr-2 size-4 shrink-0" />
+                              Pass
+                            </Button>
 
-                          <CommentDialog
-                            interviewId={interview._id}
-                          />
-                        </CardFooter>
-                      </Card>
-                    );
-                  }
-                )}
+                            <Button
+                              variant="destructive"
+                              className="w-full min-w-0 flex-1"
+                              onClick={() =>
+                                handleStatusUpdate(interview._id, "failed")
+                              }
+                            >
+                              <XCircleIcon className="mr-2 size-4 shrink-0" />
+                              Fail
+                            </Button>
+                          </div>
+                        )}
+
+                        <div className="w-full min-w-0">
+                          <CommentDialog interviewId={interview._id} />
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  );
+                })}
               </div>
             </section>
           );
         })}
       </div>
-    </div>
+    </main>
   );
 }
 

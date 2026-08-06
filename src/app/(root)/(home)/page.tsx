@@ -7,6 +7,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { api } from "../../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 import {
+  ArrowRightIcon,
   BrainCircuitIcon,
   CheckIcon,
   Code2Icon,
@@ -16,14 +17,21 @@ import {
   SparklesIcon,
   VideoIcon,
 } from "lucide-react";
+import { SignInButton, SignUpButton, useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import MeetingCard from "@/components/MeetingCard";
 
 export default function Home() {
   const router = useRouter();
+  const { isLoaded: isAuthLoaded, isSignedIn } = useAuth();
 
   const { isInterviewer, isLoading } = useUserRole();
-  const interviews = useQuery(api.interviews.getMyInterviews);
+  const interviews = useQuery(
+    api.interviews.getMyInterviews,
+    isSignedIn ? {} : "skip",
+  );
 
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<"start" | "join">("start");
@@ -45,7 +53,7 @@ export default function Home() {
     }
   };
 
-  if (isLoading) {
+  if (!isAuthLoaded || (isSignedIn && isLoading)) {
     return (
       <main className="fixed inset-0 flex items-center justify-center px-4">
         <div className="glass-panel relative flex min-w-72 items-center justify-center gap-2 rounded-2xl px-12 py-3">
@@ -57,6 +65,10 @@ export default function Home() {
         </div>
       </main>
     );
+  }
+
+  if (!isSignedIn) {
+    return <LandingPage />;
   }
 
   return (
@@ -351,7 +363,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* CANDIDATE INTERVIEWS */}
+           {/* CANDIDATE INTERVIEWS */}
             <section className="mt-5 flex min-h-0 w-full min-w-0 flex-1 flex-col pb-5 lg:pb-0">
               <div className="mb-3 flex shrink-0 flex-col gap-2 px-1 sm:flex-row sm:items-end sm:justify-between">
                 <div className="min-w-0">
@@ -370,34 +382,243 @@ export default function Home() {
               </div>
 
               {interviews === undefined ? (
-                <div className="glass-panel flex min-h-[210px] w-full flex-1 items-center justify-center rounded-[1.4rem] sm:rounded-[2rem]">
-                  <Loader2Icon className="size-7 animate-spin text-primary" />
-                </div>
+              <div className="glass-panel flex min-h-[210px] w-full flex-1 items-center justify-center rounded-[1.4rem] sm:rounded-[2rem]">
+                <Loader2Icon className="size-7 animate-spin text-primary" />
+              </div>
               ) : interviews.length > 0 ? (
-                <div className="glass-panel flex min-h-[210px] w-full flex-1 items-center justify-center rounded-[1.4rem] px-5 py-8 text-center text-sm text-muted-foreground sm:rounded-[2rem]">
-                  {interviews.length} scheduled interview(s) — meeting card
-                  coming soon
-                </div>
-              ) : (
-                <div className="glass-panel flex min-h-[210px] w-full flex-1 items-center justify-center rounded-[1.4rem] px-5 py-8 text-center sm:rounded-[2rem]">
-                  <div className="min-w-0">
-                    <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl border border-white/70 bg-white/50 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-                      <SparklesIcon className="size-6 text-primary" />
-                    </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {interviews.map((interview) => (
+        <MeetingCard
+          key={interview._id}
+          interview={interview}
+        />
+      ))}
+    </div>
+  ) : (
+    <div className="glass-panel flex min-h-[210px] w-full flex-1 items-center justify-center rounded-[1.4rem] px-5 py-8 text-center sm:rounded-[2rem]">
+      <div className="min-w-0">
+        <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl border border-white/70 bg-white/50 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+          <SparklesIcon className="size-6 text-primary" />
+        </div>
 
-                    <h3 className="font-semibold">No interviews scheduled</h3>
+        <h3 className="font-semibold">
+          No interviews scheduled
+        </h3>
 
-                    <p className="mt-2 break-words text-sm text-muted-foreground">
-                      Your upcoming interviews will appear here.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </section>
+        <p className="mt-2 break-words text-sm text-muted-foreground">
+          Your upcoming interviews will appear here.
+        </p>
+      </div>
+    </div>
+  )}
+</section>
           </>
         )}
       </div>
     </main>
+  );
+}
+
+function LandingPage() {
+  return (
+    <main className="relative min-h-[calc(100dvh-4rem)] w-full overflow-x-clip">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-40 top-10 size-[380px] rounded-full bg-pink-300/25 blur-[120px] dark:bg-pink-500/10" />
+        <div className="absolute -right-40 -top-20 size-[440px] rounded-full bg-violet-300/25 blur-[130px] dark:bg-violet-500/10" />
+        <div className="absolute bottom-0 left-1/3 size-[440px] rounded-full bg-fuchsia-200/30 blur-[130px] dark:bg-fuchsia-500/10" />
+      </div>
+
+      <div className="relative mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-7xl flex-col px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
+        <section className="flex flex-1 flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
+          <div className="flex min-w-0 flex-1 flex-col items-start">
+            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-pink-200/70 bg-white/55 px-3 py-2 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+              <span className="size-2 shrink-0 rounded-full bg-pink-500" />
+              <span className="truncate font-mono text-[10px] tracking-[0.1em] text-muted-foreground sm:text-xs">
+                A smarter way to interview
+              </span>
+            </div>
+
+            <h1 className="mt-6 max-w-2xl text-[2.65rem] font-semibold leading-[0.98] tracking-[-0.055em] min-[390px]:text-5xl sm:text-6xl lg:text-[4.45rem]">
+              <span className="block">Technical</span>
+              <span className="block">interviews,</span>
+              <span className="block bg-gradient-to-r from-pink-500 via-fuchsia-500 to-violet-500 bg-clip-text pb-1 text-transparent">
+                made human.
+              </span>
+            </h1>
+
+            <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+              Live video, collaborative coding, and thoughtful AI feedback—so
+              you can focus on what matters: real conversations and real
+              potential.
+            </p>
+
+            <div className="mt-7 flex w-full flex-col gap-3 min-[420px]:w-auto min-[420px]:flex-row">
+              <SignUpButton>
+                <button
+                  type="button"
+                  className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-fuchsia-500 px-6 text-sm font-medium text-white shadow-[0_16px_35px_-16px_rgba(236,72,153,0.8)] transition hover:-translate-y-0.5 hover:opacity-90"
+                >
+                  Get started
+                  <ArrowRightIcon className="size-4" />
+                </button>
+              </SignUpButton>
+
+              <a
+                href="#features"
+                className="inline-flex min-h-12 items-center justify-center rounded-xl border border-pink-300/70 bg-white/45 px-6 text-sm font-medium shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/70 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
+              >
+                Learn more
+              </a>
+            </div>
+
+            <p className="mt-5 text-xs text-muted-foreground">
+              Already have an account?{" "}
+              <SignInButton>
+                <button
+                  type="button"
+                  className="cursor-pointer font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Sign in
+                </button>
+              </SignInButton>
+            </p>
+          </div>
+
+          <LandingInterviewPreview />
+        </section>
+
+        <section
+          id="features"
+          className="glass-panel mt-12 grid scroll-mt-24 overflow-hidden rounded-[1.4rem] sm:grid-cols-3 sm:rounded-[1.75rem] lg:mt-10"
+        >
+          <LandingFeature
+            icon={<VideoIcon className="size-5" />}
+            title="Live collaboration"
+            description="Face-to-face conversations with shared coding in real time."
+          />
+          <LandingFeature
+            icon={<Code2Icon className="size-5" />}
+            title="Run code instantly"
+            description="A built-in editor with results available while you code."
+          />
+          <LandingFeature
+            icon={<SparklesIcon className="size-5" />}
+            title="Structured AI feedback"
+            description="Actionable insights for clearer and fairer decisions."
+          />
+        </section>
+
+        <p className="mt-6 text-center font-mono text-[10px] text-muted-foreground sm:text-xs">
+          ♡ Built for fairer, clearer technical interviews.
+        </p>
+      </div>
+    </main>
+  );
+}
+
+function LandingInterviewPreview() {
+  return (
+    <div className="relative mx-auto w-full max-w-[610px] min-w-0 lg:flex-1">
+      <div className="absolute -inset-5 rounded-[3rem] bg-gradient-to-br from-pink-300/20 to-violet-300/20 blur-2xl" />
+
+      <div className="relative rounded-[1.5rem] border border-white/70 bg-white/35 p-3 shadow-[0_28px_80px_-34px_rgba(157,53,120,0.55)] backdrop-blur-2xl sm:rounded-[2rem] sm:p-4 dark:border-white/10 dark:bg-white/5">
+        <div className="flex items-center justify-between gap-3 border-b border-pink-200/40 px-1 pb-3 dark:border-white/10">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="size-2 shrink-0 rounded-full bg-emerald-500" />
+            <span className="truncate font-mono text-[9px] text-muted-foreground sm:text-[11px]">
+              Live interview&nbsp;&nbsp; 00:24:18
+            </span>
+          </div>
+          <div className="flex shrink-0 gap-1.5">
+            <div className="flex size-8 items-center justify-center rounded-lg bg-white/60 text-fuchsia-500 dark:bg-white/5">
+              <VideoIcon className="size-3.5" />
+            </div>
+            <div className="flex size-8 items-center justify-center rounded-lg bg-white/60 text-fuchsia-500 dark:bg-white/5">
+              <MicIcon className="size-3.5" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-3 flex min-w-0 flex-col gap-3 sm:flex-row">
+          <div className="relative flex min-h-48 items-end overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br from-violet-100 via-pink-50 to-fuchsia-100 p-3 sm:w-[36%] sm:shrink-0 dark:border-white/10 dark:from-violet-950/40 dark:via-pink-950/20 dark:to-fuchsia-950/30">
+            <div className="absolute inset-x-0 top-5 flex justify-center sm:top-7">
+              <div className="relative size-28 overflow-hidden rounded-full border-4 border-white/80 bg-white/40 shadow-[0_12px_30px_-12px_rgba(126,34,206,0.55)] ring-2 ring-fuchsia-300/35 sm:size-32 dark:border-white/15 dark:bg-white/5">
+                <Image
+                  src="/candidate.png"
+                  alt="Candidate in a live technical interview"
+                  fill
+                  priority
+                  quality={100}
+                  sizes="128px"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
+            <div className="relative flex w-full items-center gap-2 rounded-xl bg-white/70 px-3 py-2 text-[10px] font-medium shadow-sm backdrop-blur-md dark:bg-black/25">
+              <span className="size-1.5 rounded-full bg-emerald-500" />
+              Candidate
+            </div>
+          </div>
+
+          <div className="relative min-w-0 flex-1 rounded-2xl border border-white/60 bg-white/60 p-3 dark:border-white/10 dark:bg-black/10 sm:min-h-[270px]">
+            <div className="mb-3 flex items-center justify-between border-b border-pink-100 pb-2 dark:border-white/10">
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-violet-100 px-2 py-1 font-mono text-[9px] font-semibold text-violet-600 dark:bg-violet-500/10 dark:text-violet-300">
+                  JS
+                </span>
+                <span className="font-mono text-[10px] font-medium">two-sum.js</span>
+              </div>
+              <span className="font-mono text-[9px] text-fuchsia-600">▶ Run</span>
+            </div>
+
+            <div className="overflow-hidden font-mono text-[9px] leading-5 sm:text-[10px] sm:leading-6">
+              <p><span className="mr-3 text-muted-foreground/50">1</span><span className="text-fuchsia-500">function</span> twoSum(nums, target) &#123;</p>
+              <p><span className="mr-3 text-muted-foreground/50">2</span>&nbsp;&nbsp;<span className="text-fuchsia-500">const</span> seen = <span className="text-violet-500">new Map</span>();</p>
+              <p><span className="mr-3 text-muted-foreground/50">3</span>&nbsp;&nbsp;<span className="text-fuchsia-500">for</span> (let i = 0; i &lt; nums.length; i++) &#123;</p>
+              <p><span className="mr-3 text-muted-foreground/50">4</span>&nbsp;&nbsp;&nbsp;&nbsp;const need = target - nums[i];</p>
+              <p><span className="mr-3 text-muted-foreground/50">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-500">if</span> (seen.has(need)) &#123;</p>
+              <p><span className="mr-3 text-muted-foreground/50">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-500">return</span> [seen.get(need), i];</p>
+              <p><span className="mr-3 text-muted-foreground/50">7</span>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</p>
+              <p><span className="mr-3 text-muted-foreground/50">8</span>&nbsp;&nbsp;&#125;</p>
+              <p><span className="mr-3 text-muted-foreground/50">9</span>&#125;</p>
+            </div>
+
+            <div className="mt-4 rounded-xl border border-pink-100 bg-white/85 p-3 shadow-sm dark:border-white/10 dark:bg-background/85 sm:absolute sm:-bottom-4 sm:left-3 sm:right-3 sm:mt-0">
+              <div className="flex items-start gap-2">
+                <BrainCircuitIcon className="mt-0.5 size-4 shrink-0 text-fuchsia-500" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-semibold">AI insight</p>
+                  <p className="mt-1 text-[9px] leading-4 text-muted-foreground sm:text-[10px]">
+                    Efficient hashmap approach with optimal complexity.
+                  </p>
+                </div>
+                <CheckIcon className="size-5 shrink-0 rounded-full bg-emerald-500 p-1 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface LandingFeatureProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+function LandingFeature({ icon, title, description }: LandingFeatureProps) {
+  return (
+    <div className="flex min-w-0 items-start gap-4 border-b border-pink-200/40 p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 dark:border-white/10">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500/15 to-violet-500/15 text-fuchsia-500">
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <h2 className="text-sm font-semibold">{title}</h2>
+        <p className="mt-1 text-xs leading-5 text-muted-foreground">{description}</p>
+      </div>
+    </div>
   );
 }
 
