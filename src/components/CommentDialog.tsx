@@ -124,7 +124,7 @@ function CommentDialog({ interviewId }: { interviewId: Id<"interviews"> }) {
             {/* RATING */}
             <div className="space-y-2">
               <Label>Rating</Label>
-              <Select value={rating} onValueChange={setRating}>
+              <Select value={rating} onValueChange={(value) => setRating(value ?? "3")}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select rating" />
                 </SelectTrigger>

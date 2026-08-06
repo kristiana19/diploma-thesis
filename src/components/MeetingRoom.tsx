@@ -58,7 +58,7 @@ function MeetingRoom() {
   return (
     <div className="meeting-room h-[calc(100vh-4rem-1px)] bg-background/95 p-2 sm:p-3">
       <ResizablePanelGroup
-        direction="horizontal"
+        orientation="horizontal"
         className="gap-2 sm:gap-3"
       >
         {/* VIDEO PANEL */}

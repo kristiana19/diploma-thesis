@@ -50,7 +50,9 @@ function CodeEditor() {
     (item) => item.id === language,
   );
 
-  const handleQuestionChange = (questionId: string) => {
+  const handleQuestionChange = (questionId: string | null) => {
+    if (!questionId) return;
+
     const question = CODING_QUESTIONS.find(
       (item) => item.id === questionId,
     );
@@ -61,7 +63,9 @@ function CodeEditor() {
     setCode(question.starterCode[language]);
   };
 
-  const handleLanguageChange = (value: string) => {
+  const handleLanguageChange = (value: string | null) => {
+    if (!value) return;
+
     const newLanguage = value as Language;
 
     setLanguage(newLanguage);

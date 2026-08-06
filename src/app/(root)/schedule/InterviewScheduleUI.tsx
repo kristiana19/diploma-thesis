@@ -182,7 +182,12 @@ function InterviewScheduleUI() {
                 <label className="text-sm font-medium">Candidate</label>
                 <Select
                   value={formData.candidateId}
-                  onValueChange={(candidateId) => setFormData({ ...formData, candidateId })}
+                  onValueChange={(candidateId) =>
+                  setFormData({
+                  ...formData,
+                  candidateId: candidateId ?? "",
+                  })
+                }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select candidate" />
@@ -219,18 +224,28 @@ function InterviewScheduleUI() {
                   ))}
                 </div>
                 {availableInterviewers.length > 0 && (
-                  <Select onValueChange={addInterviewer}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Add interviewer" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {availableInterviewers.map((interviewer) => (
-                        <SelectItem key={interviewer.clerkId} value={interviewer.clerkId}>
-                          <UserInfo user={interviewer} />
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Select
+                    onValueChange={(interviewerId) => {
+                      if (typeof interviewerId === "string") {
+                        addInterviewer(interviewerId);
+                      }
+                    }}
+                  >
+                  <SelectTrigger>
+                  <SelectValue placeholder="Add interviewer" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {availableInterviewers.map((interviewer) => (
+                    <SelectItem
+                      key={interviewer.clerkId}
+                      value={interviewer.clerkId}
+                    >
+                    <UserInfo user={interviewer} />
+                    </SelectItem>
+                  ))}
+                  </SelectContent>
+                </Select>
                 )}
               </div>
 
@@ -254,8 +269,13 @@ function InterviewScheduleUI() {
                   <label className="text-sm font-medium">Time</label>
                   <Select
                     value={formData.time}
-                    onValueChange={(time) => setFormData({ ...formData, time })}
-                  >
+                    onValueChange={(time) =>
+                    setFormData({
+                    ...formData,
+                    time: time ?? formData.time,
+                  })
+                }
+                >
                     <SelectTrigger>
                       <SelectValue placeholder="Select time" />
                     </SelectTrigger>
