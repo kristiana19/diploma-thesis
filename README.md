@@ -91,12 +91,12 @@ Projekt predstavlja raziskovalni prototip inteligentnega sistema za izvajanje te
 - [x] Clerk integracija
 - [x] Convex backend
 - [x] Podatkovni model
-- [ ] Video intervjuji
-- [ ] Monaco Editor
+- [x] Video intervjuji
+- [x] Monaco Editor
 - [ ] Piston API
 - [ ] Gemini analiza
 - [ ] AI poročila
-- [ ] Produkcijska namestitev
+- [x] Produkcijska namestitev
 
 ---
 
